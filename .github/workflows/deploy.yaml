@@ -18,19 +18,10 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~
-            sudo pkill -f honeypot.py || true
+            cd ~/aws_honeypot_project
+            git fetch --all
+            git reset --hard origin/main
             
-            if [ ! -d "aws_honeypot_project" ]; then
-              git clone https://github.com/JakubKasztelan/aws_honeypot_project.git
-            fi
-
-            cd aws_honeypot_project
+            sudo systemctl restart honeypot.service
             
-            git pull origin main
-            
-            sudo nohup python3 honeypot.py </dev/null >/dev/null 2>&1 &
-
-            disown
-            
-            sleep 2
+            sudo systemctl status honeypot.service --no-pager
