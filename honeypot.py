@@ -30,7 +30,7 @@ def start_honeypot():
             logging.warning(f"INTRUSION ATTEMPT: {client_address[0]}:{client_address[1]}")
 
             fake_banner = ("HTTP/1.1 200 OK\r\n"
-                           "Server: Apache/2.4.41 (Ubuntu)")
+                           "Server: Apache/2.4.41 (Ubuntu)\r\n\r\n")
             client_socket.send(fake_banner.encode('utf-8'))
             client_socket.close()
 
