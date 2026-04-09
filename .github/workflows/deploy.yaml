@@ -29,6 +29,8 @@ jobs:
             
             git pull origin main
             
-            sudo nohup python3 honeypot.py > /dev/null 2>&1 &
+            sudo nohup python3 honeypot.py </dev/null >/dev/null 2>&1 &
+
+            disown
             
             sleep 2
