@@ -29,16 +29,8 @@ def start_honeypot():
 
             logging.warning(f"INTRUSION ATTEMPT: {client_address[0]}:{client_address[1]}")
 
-            # Zmień tę linię w swoim skrypcie:
             fake_banner = ("HTTP/1.1 200 OK\r\n"
-                           "Server: Honeypot-Systemd-Verified\r\n"
-                           "Content-Type: text/html\r\n\r\n"
-                           "<html>"
-                           "<body>"
-                           "<h1>Security Monitor</h1>"
-                           "<p>Automatic Deployment Successful.</p>"
-                           "</body>"
-                           "</html>")
+                           "Server: Apache/2.4.41 (Ubuntu)")
             client_socket.send(fake_banner.encode('utf-8'))
             client_socket.close()
 
