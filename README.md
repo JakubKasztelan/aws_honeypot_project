@@ -60,7 +60,7 @@ At this initial level, several architectural have been identified for future mit
 
 1. **Privilege Level**
 - **Description:** The script currently requires root privileges to bind to port 80.
-- **Potential Risk:** Any vulnerability in Python interpreter or honeypot script itself could lead to a full server compormise.
+- **Potential Risk:** Any vulnerability in Python interpreter or honeypot script itself could lead to a full server compromise.
 - **Mitigation Strategy:** Allow non-privileged users to bind to low ports (using authbind)
 
 2. **Synchronous Connection Handling**
