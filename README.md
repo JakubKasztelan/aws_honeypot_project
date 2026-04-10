@@ -55,3 +55,37 @@ tail -f ~/aws_honeypot_project/honeypot.log
 ``` Bash
 grep "INTRUSION ATTEMPT" honeypot.log | awk '{print $6}' | sort | uniq -c
 ```
+## Known Limitations and Security Considerations
+At this initial level, several architectural have been identified for future mitigation:
+
+1. **Privilege Level**
+- **Description:** The script currently requires root privileges to bind to port 80.
+- **Potential Risk:** Any vulnerability in Python interpreter or honeypot script itself could lead to a full server compormise.
+- **Mitigation Strategy:** Allow non-privileged users to bind to low ports (using authbind)
+
+2. **Synchronous Connection Handling**
+- **Description:** Connections are handled synchronously in a single-thread loop.
+- **Potential Risk:** The system is vulnerable to Denial of Service (DoS) attacks.
+- **Mitigation Strategy:** Transition to a multi-thread architecture.
+
+3. **Static Fingerprinting and Detection**
+- **Description:** The script provides a static HTTP banner.
+- **Potential Limitation:** Advanced scanner (e.g. Shodan) can easily identify the service as fake.
+- **Mitigation Strategy:** Implement dynamic header generation and support for basic HTTP methods.
+
+4. **Log Persistence**
+- **Description:** Logs are stored within a project directory.
+- **Potential Limitation:** Risk of data loss during updates. The logs also reset with every service restart.
+- **Mitigation Strategy:** Move logging to a centralized system directory.
+
+## Future Roadmap
+I plan on expanding this project and implementing:
+- **Multi-port monitoring**
+- **Deep Packet Inspection (DPI)**
+- **Containerization**
+
+## Disclaimer & Legal Notice
+This project is created for educational and research purposes only.
+- **Not for Production Use:** The scripts and configurations provided in this repository are designed for a controlled laboratory environment and do not meet the security standards required for production systems.
+- **No Liability:** The author is not responsible for any misuse, damage, or legal issues caused by the application of this project. Use it at your own risk.
+- **Ethical Conduct:** Always ensure you have explicit permission before monitoring or interacting with any network traffic that is not your own.
